@@ -12,14 +12,19 @@
 
 require './Deli_class.rb'
 
-describe "#take_a_number" do
-  it "that takes a customer's name, appends their number to their name, and adds them to the line" do
-    expect(Deli.new.take_a_number("Blake")).to eq(["1. Blake"])
+katz = Deli.new
+
+describe "#add_to_line" do
+  it "takes a name and adds a customer to the line" do
+    expect(katz.add_to_line("Blake")).to eq(["Blake"])
   end
 end
 
-# describe "#now_serving" do
-#   it "removes the customer who is first in line and returns their name" do
-#     expect(take_a_number(  )).to eq()
-#   end
-#end
+corner_store = Deli.new
+corner_store.add_to_line("Blake")
+
+describe "#now_serving" do
+  it "removes the customer who is first in line and returns their name" do
+    expect(corner_store.now_serving).to eq("Blake")
+  end
+end

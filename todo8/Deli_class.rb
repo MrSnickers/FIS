@@ -12,25 +12,37 @@ class Deli
 
 attr_accessor :line
 
-@line = []
 
   def initialize
-  @line = line
-
+    @line = []
   end
 
+   def add_to_line(name)
+      line << name
+ end
 
-  def take_a_number(name)
-  if line.nil?
-  line = ["1. #{name}"]
-  else
-  formatted_item = "#{line.length+1}. #{name}"
-  line << formatted_item
+  # def take_a_number(name)
+  # if line.nil?
+  #   line[0][:place] = "1. "
+  #   line[0][:name] = name
+  # else
+  #   line[-1][:place] = "#{line.length}. "
+  #   line[-1[:name] = name
+  # end
+  #   return line
+  # end
+
+  def post_line
+    position = 1
+    line.each do |person|
+      puts "#{position}. #{person}"
+    end
+    end
+
+  def now_serving
+   puts "Now serving #{line[0]}!"
+   line.shift
   end
-  return line
-
-  end
-
 
 end
 

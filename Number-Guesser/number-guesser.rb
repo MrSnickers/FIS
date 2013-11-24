@@ -11,17 +11,21 @@ def guess(answer, standard)
           puts "That's it!"
           return true
     else
-          puts "Nope.  I was thinking of #{standard}."
+          puts "Nope.  I wasn't thinking of #{answer}."
           return false
     end
 end
 
 
+
 puts "Please guess a number between 1 and 100."
 input = gets.chomp
 standard = rand(1..100)
-guess(input, standard)
-
-
-
-
+while guess(input, standard) == false
+    if input.downcase == "exit"
+        break
+    else
+    puts "Want to guess again?"
+    input = gets.chomp
+    end
+end

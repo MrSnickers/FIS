@@ -10,12 +10,7 @@ end
 
 def match(test_array)
   anagram_array = []
-  test_array.each do |item|
-    if item.chars.sort.join == word.chars.sort.join
-      anagram_array << item
-    end
-  end
-   anagram_array
+  test_array.select {|item| item.downcase.chars.sort.join == word.downcase.chars.sort.join}
 end
 
 

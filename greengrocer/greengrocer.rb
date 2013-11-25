@@ -34,6 +34,7 @@ def generateCart
 	cart
 end
 
+
 #randomly generates set of coupons
 def generateCoups
 	coups = []
@@ -42,7 +43,77 @@ def generateCoups
 	end
 	coups
 end
-#
+
+
+# # Create a checkout method to calculate the total cost of a cart of items and apply discounts and coupons as necessary.
+
+# def checkout(cart)
+
+# end
+
+
+
+def condenser(cart)
+  condensed_basket =[]
+  condensed_hash ={}
+  cart.each do |item|
+    item.each do |food, info_hash|
+      if condensed_hash[food].nil?
+        info_hash[:count] =1
+        condensed_hash[food] = info_hash
+      else
+        condensed_hash[food][:count] = condensed_hash[food][:count] + 1
+      end
+    end
+  end
+condensed_hash.each_pair do |food, updated_hash|
+  condensed_basket << { food => updated_hash}
+end
+return condensed_basket
+
+end
+
+
+def total(cart)
+  ##this does not work if items in the cart have the same name.  Why is that?
+  running_total = 0
+  cart.each do |item|
+    item.each do |food, value_hash|
+    running_total = running_total + (value_hash[:price] * value_hash[:count])
+  end
+end
+return running_total
+
+end
+
+
+def clearance(condensed_cart)
+condensed_cart.each do |item|
+  item.each do |food, value_hash|
+    if value_hash[:clearance] == true
+      value_hash[:price] = (value_hash[:price] * 0.8).round(2)
+    end
+  end
+end
+return condensed_cart
+
+def coupon_check(clearance_cart, coupon_array )
+  clearance_cart.each do |cart_item|
+    item.each do |food, value_hash|
+      coupon_array.each do|coupon|
+      if cart_item[food] == coupon[:item]
+        if cart_item[value_hash]>= coupon[:num]
+          #returns difference b/t regular cost and coupon price
+        end
+      end
+
+     end
+    end
+  end
+
+end
+
+# total( [{"AVOCADO" => {:price => 3.00, :clearance => true, :count => 1}}, {"AVOCADO" => {:price => 3.00, :clearance => true, :count => 1}} ])
 
 ##the cart is currently an array of individual items, translate it into a hash that includes the counts for each item
   # For example if your cart was [  {"AVOCADO" => {:price => 3.00, :clearance => true}}, {"AVOCADO" => {:price => 3.00, :clearance => true}}]
@@ -53,9 +124,6 @@ end
 ##if the customer has 2 of the same coupon, triple the discount
 ##if none of the items purchased have a unit price greater than 5$ give the customer a 10$ discount off the whole cart
 
-# ```
-# ##Reward
-# https://www.youtube.com/watch?v=-RuSCACXmXs
 
 
 

@@ -53,29 +53,38 @@ end
 #   [1,2,3] and [5,9,4]
     [1,2,3].concat([5,9,4])
 
-11. find all words that begin with "a" in the following array
-  ["apple", "orange", "pear", "avis", "arlo", "ascot" ]
+#11. find all words that begin with "a" in the following array
+  array_to_sort = ["apple", "orange", "pear", "avis", "arlo", "ascot" ]
+  array_to_sort.each do |item|
+    sorted_array =[]
+    if item[0].downcase = "a"
+      sorted_array << item
+    end
+end
+
 # 11. sum all the numbers in the following array
   to_sum = [11,4,7,8,9,100,134]
   to_total.reduce(:+)
 
-12. Add an "s" to each word in the array except for the 2nd element in the array?
-  ["hand","feet", "knee", "table"]
-CHALLENGE
+#12. Add an "s" to each word in the array except for the 2nd element in the array?
+  to_be_pluralized = ["hand","feet", "knee", "table"]
+  to_be_pluralized.each 
 
-word count
+# CHALLENGE
 
-"The summer of tenth grade was the best summer of my life.  I went to the beach everyday and we had amazing weather.  The weather didnt really vary much and was always pretty hot although sometimes at night it would rain.  I didnt mind the rain because it would cool everything down and allow us to sleep peacefully.  Its amazing how much the weather affects your mood.  Who would have thought that I could write a whole essay just about the weather in tenth grade.  Its kind of amazing right?  Youd think for such an interesting person I might have more to say but you would be wrong"
+# word count
 
-Count how many times each word appears in my story.
-Tip: You'll need to use Hash.new(0) to do this rather than creating a hash using literal syntax like {}.
+# "The summer of tenth grade was the best summer of my life.  I went to the beach everyday and we had amazing weather.  The weather didnt really vary much and was always pretty hot although sometimes at night it would rain.  I didnt mind the rain because it would cool everything down and allow us to sleep peacefully.  Its amazing how much the weather affects your mood.  Who would have thought that I could write a whole essay just about the weather in tenth grade.  Its kind of amazing right?  Youd think for such an interesting person I might have more to say but you would be wrong"
 
-song library
+# Count how many times each word appears in my story.
+# Tip: You'll need to use Hash.new(0) to do this rather than creating a hash using literal syntax like {}.
 
-convert the following array of song titles
+# song library
+
+# convert the following array of song titles
   
-  ["dave matthews band - tripping billies", "dave matthews band - #41", "calvin harris - some techno song", "avicii - some other dance song", "oasis - wonderwall", "oasis - champagne supernova"]
+#   ["dave matthews band - tripping billies", "dave matthews band - #41", "calvin harris - some techno song", "avicii - some other dance song", "oasis - wonderwall", "oasis - champagne supernova"]
 
-to a nested hash of the form
-{:artist1 => :songs => [], :artist2 => :songs => []}
+# to a nested hash of the form
+# {:artist1 => :songs => [], :artist2 => :songs => []}
 []

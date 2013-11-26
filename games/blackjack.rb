@@ -12,35 +12,42 @@
 ##Challenge
 #After successfully completing the previous game (there should be a commit with a working version of this game), alter the game so that a player can "hit" as many times as they want.
 
+class Game
+ 
+attr_accessor :hand
 
-hand = []
-total =  hand.reduce(0) do |sum, number|
-  sum+number
-end
-
-def deal(number, hand)
-  number.times do hand<< rand(1..10)
+  def initialize
+      @hand = []
   end
+
+  def deal(number)
+    number.times do
+        hand << rand(1..11)
+    end
+  end
+
+
+  def total
+      hand.reduce { |sum, number| sum +number}
   end
 
   def hit
-    puts "Hit?"
-    response = gets.chomp
-    deal(1, hand) if response == "y"
-    puts "Your hand is #{hand*" "}"
+        puts "Hit?"
+        response = gets.chomp
+        deal(1) if response == "y"
+        puts "Your hand is #{hand.join(' ')}."
   end
 
-  puts "Want to play blackjack? y/n"
-  response = gets.chomp
-    deal(2, hand) if response == "y"
-  puts "Your hand is #{hand*" "} that's #{total}"
-   if total == 21
-    puts "You win!"
-  end
-  if total<21
-    hit
-  end
-  puts "Sorry, you busted." if total > 21
+
+
+
+end
+
+
+
+
+
+
 
 
 

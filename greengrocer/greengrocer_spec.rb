@@ -4,7 +4,21 @@
 #Objectives: 
 # Create a checkout method to calculate the total cost of a cart of items and apply discounts and coupons as necessary.
 # any?, all?, none?, each, map/collect
+
+RSpec.configure do |config|
+  # Use color in STDOUT
+  config.color_enabled = true
+ 
+  # Use color not only in STDOUT but also in pagers and files
+  config.tty = true
+ 
+  # Use the specified formatter
+  config.formatter = :progress # :progress, :html, :textmate
+end
+
+
 require './greengrocer.rb'
+
 
 describe "#condenser" do
   it "takes individual items and translate it into a hash that includes the counts for each item" do
@@ -25,49 +39,34 @@ describe "#total" do
   end
 end
 
-describe "#coupon_check" do
-  it "if the customer has a coupon and the required number of named items it applies one coupon if there is a discount" do
-    expect(coupon_check(  ["BEER" => {:price => 13.00, :clearance => false, :count => 2}, "CHEESE" => {:price => 6.50, :clearance => false, :count => 1} ], [{:item=>"BEER", :num=>2, :cost=>20.00}, {:item=>"CHEESE", :num=>3, :cost=>15.00}] )).to eq(21.50)
+describe "#redeem_coupons" do
+  it "if the customer has a coupon and the required number of named items it applies the coupon if there is a discount" do
+    expect(redeem_coupons(  ["BEER" => {:price => 13.00, :clearance => false, :count => 2}, "CHEESE" => {:price => 6.50, :clearance => false, :count => 1} ], [{:item=>"BEER", :num=>2, :cost=>20.00}, {:item=>"CHEESE", :num=>3, :cost=>15.00}] )).to eq(6)
 
   end
 end
 
 describe "#coupon_check" do
-  it "if the customer has a coupon and the required number of named items it applies one coupon if there is a discount" do
-    expect(coupon_check(  ["BEER" => {:price => 13.00, :clearance => false, :count => 4}, "CHEESE" => {:price => 6.50, :clearance => false, :count => 1} ], [{:item=>"BEER", :num=>2, :cost=>20.00}, {:item=>"CHEESE", :num=>3, :cost=>15.00}] )).to eq(47.50)
+  it "if the customer has a coupon and more than the required number of named items it applies ONLY one instance of the applicable coupon" do
+    expect(redeem_coupons(  ["BEER" => {:price => 13.00, :clearance => false, :count => 4}, "CHEESE" => {:price => 6.50, :clearance => false, :count => 1} ], [{:item=>"BEER", :num=>2, :cost=>20.00}, {:item=>"CHEESE", :num=>3, :cost=>15.00}] )).to eq(6)
 
   end
 end
 
 describe "#coupon_check" do
-  it "if the customer has a coupon and the required number of named items it applies one coupon if there is a discount" do
-    expect(coupon_check(  ["AVOCADO" => {:price => 2.4, :clearance => true, :count => 2} ], [{:item=>"AVOCADO", :num=>2, :cost=>5.00}, {:item=>"CHEESE", :num=>3, :cost=>15.00}] )).to eq(4.80)
+  it "if the customer has a coupon and the required number of named items it applies one coupon ONLY if there is a discount" do
+    expect(redeem_coupons(  ["AVOCADO" => {:price => 2.4, :clearance => true, :count => 2} ], [{:item=>"AVOCADO", :num=>2, :cost=>5.00}, {:item=>"CHEESE", :num=>3, :cost=>15.00}] )).to eq(0)
 
   end
 end
 
-# describe "#triple_coupon_check" do
-#   it "if the customer has 2 of the same coupon, triple the discount" do
-#     expect(triple_coupon_check({:item=>"AVOCADO", :num=>2, :cost=>5.00}))
+describe "#double_coupon_check" do
+  it "if the customer has 2 of the same coupon, triple the discount" do
+    expect(triple_coupon_check({:item=>"BEER", :num=>2, :cost=>20.00})).to eq(18.00)
 
-#   end
+  end
 end
 
-
-
-# #randomly generates set of coupons
-# def generateCoups
-#   coups = []
-#   rand(2).times do
-#     coups.push(COUPS.sample)
-#   end
-#   coups
-# end
-# # Create a checkout method to calculate the total cost of a cart of items and apply discounts and coupons as necessary.
-
-# def checkout(cart)
-  
-# end
 
 
 

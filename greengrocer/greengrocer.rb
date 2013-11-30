@@ -45,13 +45,6 @@ def generateCoups
 end
 
 
-# # Create a checkout method to calculate the total cost of a cart of items and apply discounts and coupons as necessary.
-
-# def checkout(cart)
-
-# end
-
-
 
 def condenser(cart)
   condensed_basket =[]
@@ -74,19 +67,6 @@ return condensed_basket
 end
 
 
-def total(cart)
-  ##this does not work if items in the cart have the same name.  Why is that?
-  running_total = 0
-  cart.each do |item|
-    item.each do |food, value_hash|
-    running_total = running_total + (value_hash[:price] * value_hash[:count])
-  end
-end
-return running_total
-
-end
-
-
 def clearance(condensed_cart)
 condensed_cart.each do |item|
   item.each do |food, value_hash|
@@ -96,31 +76,65 @@ condensed_cart.each do |item|
   end
 end
 return condensed_cart
+end
 
-def coupon_check(clearance_cart, coupon_array )
-  clearance_cart.each do |cart_item|
+
+def total(cart)
+  ##this does not work if items in the cart have the same name.  Why is that?
+  running_total = 0
+  cart.each do |item|
     item.each do |food, value_hash|
-      coupon_array.each do|coupon|
-      if cart_item[food] == coupon[:item]
-        if cart_item[value_hash]>= coupon[:num]
-          #returns difference b/t regular cost and coupon price
-        end
-      end
-
-     end
-    end
+    running_total += (value_hash[:price] * value_hash[:count])
   end
+end
+return running_total
 
 end
 
-# total( [{"AVOCADO" => {:price => 3.00, :clearance => true, :count => 1}}, {"AVOCADO" => {:price => 3.00, :clearance => true, :count => 1}} ])
 
-##the cart is currently an array of individual items, translate it into a hash that includes the counts for each item
-  # For example if your cart was [  {"AVOCADO" => {:price => 3.00, :clearance => true}}, {"AVOCADO" => {:price => 3.00, :clearance => true}}]
-  # it would become {"AVOCADO" => {:price => 3.00, :clearance => true}, :count => 2}
-##create a checkout method that calculates the total cost of the cart
-##when checking out, check the coupons and apply the discount if the proper number of items is present
-##if any of the items are on clearance add a 20% discount
+def redeem_coupons(clearance_cart, coupon_array )
+  savings = 0
+  clearance_cart.each do |item|
+    item.each do |food, value_hash|
+      unless coupon_array.nil?
+        coupon_array.each do|coupon|
+          if food == coupon[:item] && value_hash[:count]>= coupon[:num]
+          savings +=((coupon[:num] * value_hash[:price]) - coupon[:cost]) if ((coupon[:num] * value_hash[:price]) - coupon[:cost]) > 0
+          end
+        end
+     end
+    end
+  end
+  savings
+end
+
+def multiple_coupon_check(coupon_array)
+  unique_coupons =coupon_array.uniq!
+  unique_coupons.each do |coupon|
+    coupon_array.select! {}
+end
+
+
+
+
+  count_hash = {}  # this is to keep track of the count corresponding to each item
+  uniq_item_list.each do |item|  #for each item on the unique list
+    count = cart.select {|hash_items| hash_items == item}.size   #set count = to the size of a select statement
+    count_hash[item] = count                                     #on the original cart
+  end
+  uniq_cart = cart.uniq   #wipe out duplicates in the cart
+  
+  uniq_cart.each do |item_hash|   #for each item in the unique cart
+    item_hash[:count] = count_hash[item_hash]   #add a key :count which has a value pulled from our count_hash
+  end
+  uniq_cart #return our uniq grocery cart!
+end
+
+# def checkout(cart)
+
+# end
+
+
 ##if the customer has 2 of the same coupon, triple the discount
 ##if none of the items purchased have a unit price greater than 5$ give the customer a 10$ discount off the whole cart
 

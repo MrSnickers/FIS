@@ -4,15 +4,14 @@ class Genre
 
 attr_accessor :name
 
-GENRES = []
+@@genre_array = []
 
   def initialize
-     @name
-     GENRES << self
+     @@genre_array << self
   end
 
-  def count
-    self.length
+  def self.reset_genres
+    @@genre_array = []
   end
 
   def songs
@@ -20,8 +19,10 @@ GENRES = []
   end
 
   def artists
-    songs.collect{|song| song.artist}
-
+    songs.collect{|song| song.artist}.uniq
   end
 
+  def self.all
+    @@genre_array
+  end
 end

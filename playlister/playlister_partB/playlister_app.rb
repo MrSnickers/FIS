@@ -50,13 +50,22 @@ when response == "a"
   puts "Please enter the number of the requested artist."
     artist_list.each_with_index {|artist, index| puts "#{index+1}. #{artist.name} - song count: #{artist.songs_count}"}
     request_index = gets.chomp.to_i
-    request_index -1
+    request_index -= 1
+    puts "#####{artist_list[request_index].name} - song count: #{artist_list[request_index].songs_count}"
+    artist_list[request_index].songs.each_with_index do |song, index|
+      puts "######{index+1}. #{song.title} - #{song.genre.name}"
+    end
 
 when response == "g"
     puts "Please enter the number of the requested genre."
     genre_list.each_with_index {|genre, index| puts "#{index+1}. #{genre.name} - song count: #{genre.songs.length}"}
     request_index = gets.chomp.to_i
-    request_index -1
+    request_index -=1
+     puts "#####{genre_list[request_index].name} - song count: #{genre_list[request_index].songs.length}"
+    genre_list[request_index].songs.each_with_index do |song, index|
+      puts "######{index+1}. #{song.title} - #{song.artist.name}"
+    end
+
 
 when response == "exit"
       puts "Goodbye"

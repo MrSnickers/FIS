@@ -3,87 +3,63 @@
 require './lib/artist_class.rb'
 require './lib/song_class.rb'
 require './lib/genre_class.rb'
-require './lib/parser_class.rb'
 require 'awesome_print'
 
 
 my_directory = Dir.new("./data").entries.select {|f| !File.directory? f}
-genre_array = []
-artist_array = []
-song_array = []
- my_directory.each do |song_data|
-  genre_array << song_data.split(" [")[-1][0..-6]
-  artist_array << song_data.split(" - ")[0][0..-1]
-  song_array << song_data.split(/ [-\[]/)[1]
+
+
+my_directory.each do |song_data|
+  artist_name = song_data.split(" - ")[0][0..-1]
+  song_title = song_data.split(/ [-\[]/)[1]
+  genre = song_data.split(" [")[-1][0..-6]
+
+  temp_song = Song.new
+  temp_song.title = song_title
+
+  preexisting_genre = Genre.all.detect {|item| item.name == genre}
+  if preexisting_genre
+      temp_song.genre=(preexisting_genre)
+  else
+      temp_genre = Genre.new
+      temp_genre.name = genre
+      temp_song.genre=(temp_genre)
+  end
+ 
+  preexisting_artist = Artist.all.detect {|item| item.name == artist_name}
+  if preexisting_artist
+    preexisting_artist.add_song(temp_song)
+  else
+    temp_artist = Artist.new
+    temp_artist.name = artist_name
+    temp_artist.add_song(temp_song)
+  end
 end
-puts song_array
 
+artist_list = Artist.all.sort! {|artist1, artist2| artist1.name <=> artist2.name}
+genre_list = Genre.all.sort! {|genre1, genre2| genre1.name <=> genre2.name}
 
+puts "To browse artists type 'A'"
+puts "To browse genres type 'G'"
+puts "To exit type 'exit'"
+response = gets.chomp.downcase
 
+case
 
+when response == "a"
+  puts "Please enter the number of the requested artist."
+    artist_list.each_with_index {|artist, index| puts "#{index+1}. #{artist.name} - song count: #{artist.songs_count}"}
+    request_index = gets.chomp.to_i
+    request_index -1
 
+when response == "g"
+    puts "Please enter the number of the requested genre."
+    genre_list.each_with_index {|genre, index| puts "#{index+1}. #{genre.name} - song count: #{genre.songs.length}"}
+    request_index = gets.chomp.to_i
+    request_index -1
 
-# current songs = Parser.new()
-# student_scraper = Scraper.new("http://flatironschool-bk.herokuapp.com/")
+when response == "exit"
+      puts "Goodbye"
+else puts "Please type 'A' for artists and 'G' for genres."
+end
 
-# name_array = student_scraper.get_students_names
-# blog_array = student_scraper.get_students_blogs
-# twitter_array = student_scraper.get_students_twitters
-
-# index_counter = 0
-# student_directory = []
-
-# name_array.each do |name|
-#   student_directory << Student.new(name, twitter_array[index_counter], blog_array[index_counter])
-#   index_counter += 1
-# end
-
-# student_directory.sort! {|student1, student2| student1.name <=> student2.name}
-
-# def directory(student_directory)
-#     puts "Please enter the number of the requested student."
-#     student_directory.each_with_index do |student, index|
-#         puts "#{index+1}. #{student.name}"
-#     end
-#     request_index = gets.chomp.to_i
-#     request_index -1
-# end
-
-
-
-# puts "Do you want to look up the Twitter of a specific student? Type: 'T'"
-# puts "Do you want to look up the blog of a specific student? Type: 'B'"
-# puts "Do you want to try out Twitter roulette? Type: 'R'"
-# puts "Do you want to view a random blog? Type: 'L'"
-# puts "To exit type: 'exit'"
-
-# response = gets.chomp
-# case
-
-# when response.downcase == "t"
-#     student_index = directory(student_directory)
-#    if student_directory[student_index].twitter == "none"
-#       puts "Sorry that student has not shared a Twitter account."
-#    else
-#      Launchy.open("#{student_directory[student_index].twitter}")
-#    end
-# when response.downcase == "b"
-#     student_index = directory(student_directory)
-#    if student_directory[student_index].blog == "none"
-#     puts "Sorry that student has not shared a blog."
-#    else
-#     Launchy.open("#{student_directory[student_index].blog}")
-#    end
-# when response.downcase == "r"
-#     random_twitter = student_directory.sample.twitter
-#     random_twitter = student_directory.sample.twitter if random_twitter == "none"
-#      Launchy.open("#{student_directory.sample.twitter}")
-# when response.downcase == "l"
-#     random_blog = student_directory.sample.blog
-#     random_blog = student_directory.sample.blog if random_blog == "none"
-#     Launchy.open("#{student_directory.sample.blog}")
-# when response.downcase == "exit"
-#     puts "Goodbye"
-# else 
-#     puts "I am so confused."
-# end

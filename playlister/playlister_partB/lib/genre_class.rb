@@ -8,6 +8,7 @@ attr_accessor :name
 
   def initialize
      @@genre_array << self
+     @name
   end
 
   def self.reset_genres

@@ -3,7 +3,6 @@
 require './lib/artist_class.rb'
 require './lib/song_class.rb'
 require './lib/genre_class.rb'
-require 'awesome_print'
 
 
 my_directory = Dir.new("./data").entries.select {|f| !File.directory? f}
@@ -19,11 +18,11 @@ my_directory.each do |song_data|
 
   preexisting_genre = Genre.all.detect {|item| item.name == genre}
   if preexisting_genre
-      temp_song.genre=(preexisting_genre)
+    temp_song.genre=(preexisting_genre)
   else
-      temp_genre = Genre.new
-      temp_genre.name = genre
-      temp_song.genre=(temp_genre)
+    temp_genre = Genre.new
+    temp_genre.name = genre
+    temp_song.genre=(temp_genre)
   end
  
   preexisting_artist = Artist.all.detect {|item| item.name == artist_name}
@@ -47,21 +46,31 @@ response = gets.chomp.downcase
 case
 
 when response == "a"
-  puts "Please enter the number of the requested artist."
-    artist_list.each_with_index {|artist, index| puts "#{index+1}. #{artist.name} - song count: #{artist.songs_count}"}
+    puts "Please enter the number of the requested artist."
+    
+    artist_list.each_with_index  do |artist, index| 
+      s = "s" if artist.songs_count > 1
+      #Kate's pluralization solution
+      puts "#{index+1}. #{artist.name} - #{artist.songs_count} song#{s}"
+    end
     request_index = gets.chomp.to_i
     request_index -= 1
-    puts "#####{artist_list[request_index].name} - song count: #{artist_list[request_index].songs_count}"
+    s = "s" if artist_list[request_index].songs_count > 1
+    puts "#####{artist_list[request_index].name} - #{artist_list[request_index].songs_count} song#{s}"
     artist_list[request_index].songs.each_with_index do |song, index|
       puts "######{index+1}. #{song.title} - #{song.genre.name}"
     end
 
 when response == "g"
     puts "Please enter the number of the requested genre."
-    genre_list.each_with_index {|genre, index| puts "#{index+1}. #{genre.name} - song count: #{genre.songs.length}"}
+    genre_list.each_with_index do|genre, index|
+      s = "s" if genre.songs.length >1
+      puts "#{index+1}. #{genre.name} - #{genre.songs.length} song#{s}"
+    end
     request_index = gets.chomp.to_i
     request_index -=1
-     puts "#####{genre_list[request_index].name} - song count: #{genre_list[request_index].songs.length}"
+    s = "s" if genre_list[request_index].songs.length > 1
+     puts "#####{genre_list[request_index].name} - #{genre_list[request_index].songs.length} song#{s}"
     genre_list[request_index].songs.each_with_index do |song, index|
       puts "######{index+1}. #{song.title} - #{song.artist.name}"
     end

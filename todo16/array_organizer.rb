@@ -27,11 +27,11 @@ def unique_array
   @unique_array
 end
 
-def get_number
-  unique_array.each do |item|
-    number = given_array.select{|repeat| repeat == item }
-    number.length
+def make_hash
+  @unique_array.each do |item|
+    @return_hash[item] = @given_array.select{|repeat| repeat == item }.length
   end
+@return_hash
 end
 
 

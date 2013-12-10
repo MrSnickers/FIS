@@ -27,9 +27,9 @@ it "should populate the compacted array with a unique array of items" do
    expect(organizer.unique_array).to eq(test.uniq)
 end
 
-it "should select over each item of the unique array and return a count of how many are in the original array" do
-    organizer = Organizer.new(['fish', 'fish'])
-    expect(organizer.get_number).to eq(2)
+it "should make a hash of each item of the unique array with the count of how many are in the original array" do
+    organizer = Organizer.new(['fish', 'fish', 'cat'])
+    expect(organizer.make_hash).to eq({"fish"=>2, "cat"=>1})
 end
 
 

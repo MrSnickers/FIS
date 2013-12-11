@@ -1,0 +1,9 @@
+
+
+<ol>
+  <% @my_artists.each_with_index do |artist, index| %>
+    <a href= "/artists/<%=index%>"><button><%="#{index +1}. #{artist.name}" %> </button></a>
+  <% end %>
+</ol>
+
+<h2> To see an artist's page navigate to their index</h2>

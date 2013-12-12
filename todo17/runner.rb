@@ -22,7 +22,8 @@ def run_command(command)
     jukebox = Jukebox.new
     jukebox.list_library
   else
-    puts "I did not understand '#{command}'!\n\n"
+    jukebox = Jukebox.new
+    jukebox.parse_command(command)
   end
 end
 

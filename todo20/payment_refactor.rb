@@ -1,49 +1,55 @@
-require_relative "using_blocks_refactoring_solution"
+# You have software to take payment from a customer
+# There are 4 ways to pay, and they are all very similar.
+# One day, you are paying by cash, and you realize you never calculated the tax!
+# So you went in to your code and added order.compute_tax to the pay_by_cash method.
+# Everything was great, until you realized you forgot to add it to pay_by_check also!
+#
+# You fixed this bug already, but the same code is duplicated in many places,
+# so the bug fix didn't get everything. Frustrated, you decide to refactor your code.
+# 
+# You see a lot of duplciation, but unfortunately, right in the middle of each of these
+# pieces of code, is a line or two that changes every time.
+#
+# Thinking a little bit, you realize that you could create a method that performs this
+# boiler plate code, then calls a block which does the custom code.
+#
+# You decide to name it pay_by.
+#
+# **Create the pay_by method, and refactor each of the four methods below such that they
+# invoke the pay_by method, and pass it the order, to take care of the code that is all the same
+# Let them pass a block to take care of the code that is unique.**
+#
+# NOTE: This code will only work with the rake tests, which will define the order and current_user
+# you will not be able to run this code outside of the test
+ def pay_by(order)
+  order.compute_cost
+  order.compute_shipping
+  order.compute_tax
+    yield order
+  order.ship_goods
+ end
  
-describe 'refactoring' do
+def pay_by_visa(order, ccn)
+  pay_by(order) do |order|
+    order.payment :type => :visa , :ccn => ccn
+    order.verify_payment
+  end
+end
  
-  describe 'original methods with pay_by intercepted' do
-    before :each do
-      @order = double :order
-      stub!(:pay_by)
-    end
-  
-    it 'should invoke nothing for pay_by_visa' do
-      ccn = double :ccn
-      pay_by_visa @order , ccn
-    end
-  
-    it 'should invoke nothing for pay_by_check' do
-      pay_by_check @order
-    end
-  
-    it 'should invoke nothing for pay_by_cash' do
-      pay_by_cash @order
-    end 
-  
-    it 'should invoke nothing for pay_by_store_credit' do
-      current_user = double :current_user
-      pay_by_store_credit @order , current_user
-    end
+def pay_by_check(order)
+  pay_by(order) {|order| order.payment :type => :check , :signed => true}
+
+end
+ 
+def pay_by_cash(order)
+  pay_by(order) do |order|
+    order.payment :type => :cash
   end
-  
-  
-  describe 'pay_by' do
-    it 'should have a method pay_by that receives the order, computes boiler plate code, and invokes the block' do
-      @order = double :order
-      @order.should_receive(:compute_cost).once
-      @order.should_receive(:compute_shipping).once
-      @order.should_receive(:compute_tax).once
-      @order.should_receive(:ship_goods).once
-      block_called = double(:block_called)
-      block_called.should_receive :block_was_called
-      yielded = []
-      pay_by @order do |order|
-        yielded << order
-        block_called.block_was_called
-      end
-      yielded.should eq([@order])
-    end
+end
+ 
+def pay_by_store_credit(order, current_user)
+  pay_by do |order|
+    order.payment :type => :store_credit
+    current_user.store_credit -= order.cost   # current_user is a method with no params (ie, the customer)
   end
-  
 end

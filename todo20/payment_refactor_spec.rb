@@ -1,4 +1,4 @@
-require_relative "using_blocks_refactoring_solution"
+require "./payment_refactor.rb"
  
 describe 'refactoring' do
  

@@ -7,6 +7,7 @@ GEM
       rack
     rack-test (0.6.2)
       rack (>= 1.0)
+    rainbow (1.1.4)
     ripl (0.7.0)
       bond (~> 0.4.2)
     ripl-multi_line (0.3.1)
@@ -32,6 +33,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  rainbow
   shotgun
   sinatra
   tux

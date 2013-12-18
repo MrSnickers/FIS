@@ -1,3 +1,3 @@
-require './world_app.rb'
+require './is_it_my_birthday.rb'
 
-run TestApp
+run BirthdayCheck

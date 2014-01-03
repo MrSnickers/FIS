@@ -1,13 +1,23 @@
 ### NUMBER GUESSER SPEC
 
-require './number-guesser.rb'
+require './number_guesser_class.rb'
+require 'mocha/setup'
 
-describe "#number" do
-  it "will return false if guess does not equal standard " do
-    expect(guess(4, 20)).to eq(false)
-  end
- it "will return true if guess does equal standard " do
-    expect(guess(20, 20)).to eq(true)
-  end
+RSpec.configure do |config|
+  # Use color in STDOUT
+  config.color_enabled = true
 
+  # Use color not only in STDOUT but also in pagers and files
+  config.tty = true
+
+  # Use the specified formatter
+  config.formatter = :documentation # :progress, :html, :textmate
+end
+
+describe "#standard" do
+  it "should create a standard number between 1 and 100" do
+    game = Number_guesser.new
+
+    expect(game.standard).to be < 100
+  end
 end

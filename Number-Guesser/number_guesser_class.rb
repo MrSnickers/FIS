@@ -11,11 +11,7 @@ attr_reader :standard
   end
 
   def check_guess
-        if @input == @standard
-           true
-      else
-           false
-      end
+    @input == @standard
   end
 
 end

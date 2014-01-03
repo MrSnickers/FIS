@@ -6,5 +6,9 @@ attr_reader :standard
     @standard = rand(1..100)
   end
 
+  def guess
+    @input = gets.chomp
+  end
+
 
 end

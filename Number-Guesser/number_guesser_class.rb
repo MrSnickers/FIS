@@ -7,15 +7,15 @@ attr_reader :standard, :input
   end
 
   def guess
-    @input = gets.chomp
+    @input = gets.chomp.to_i
   end
 
   def match?
     input == standard
   end
 
-  def guess_valid?
-    input.class == Fixnum
+  def input_valid?
+    input.class == Fixnum && input > 0
   end
 
 end

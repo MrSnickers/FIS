@@ -23,14 +23,14 @@ describe "#Number_guesser" do
     game = Number_guesser.new
     game.stub(:input) { 5 }
 
-    expect(game.guess_valid?).to eq(true)
+    expect(game.input_valid?).to eq(true)
   end
 
     it "should recognize a string as an invalid input" do
     game = Number_guesser.new
     game.stub(:input) { "bubbles" }
 
-    expect(game.guess_valid?).to eq(false)
+    expect(game.input_valid?).to eq(false)
   end
 
 end

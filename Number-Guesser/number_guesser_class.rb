@@ -14,9 +14,12 @@ attr_reader :standard
     @input == @standard
   end
 
+  def guess_valid?
+    @input.class == Fixnum
+  end
+
 end
 
 
 #### validate that input is a number
-#### allow subsequent guesses
-#### Let user exit
+

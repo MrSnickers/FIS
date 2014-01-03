@@ -16,7 +16,7 @@ game.guess
 if game.check_guess
   puts "That's it!"
 else
-  puts "Nope.  I wasn't thinking of #{}."
+  puts "Nope.  I wasn't thinking of #{game.input}."
 end
 
 

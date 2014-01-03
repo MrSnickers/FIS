@@ -15,3 +15,8 @@ attr_reader :standard
   end
 
 end
+
+
+#### validate that input is a number
+#### allow subsequent guesses
+#### Let user exit

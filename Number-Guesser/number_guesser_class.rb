@@ -10,7 +10,7 @@ attr_reader :standard
     @input = gets.chomp
   end
 
-  def check_guess
+  def match?
     @input == @standard
   end
 

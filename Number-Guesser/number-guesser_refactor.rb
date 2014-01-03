@@ -11,6 +11,10 @@ require './number_guesser_class.rb'
 
 game = Number_guesser.new
 
+puts "Please guess a number between 1 and 100."
+
+#input = gets.chomp
+
 # def guess(answer, standard)
 #       if answer == standard
 #           puts "That's it!"
@@ -23,8 +27,8 @@ game = Number_guesser.new
 
 
 
-# puts "Please guess a number between 1 and 100."
-# #input = gets.chomp
+
+
 # while guess(input, standard) == false
 #     if input.downcase == "exit"
 #         break

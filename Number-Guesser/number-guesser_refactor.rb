@@ -12,7 +12,8 @@ require './number_guesser_class.rb'
 game = Number_guesser.new
 
 puts "Please guess a number between 1 and 100."
-if game.guess.check_guess
+game.guess
+if game.check_guess
   puts "That's it!"
 else
   puts "Nope.  I wasn't thinking of #{}."

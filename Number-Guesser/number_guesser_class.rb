@@ -19,7 +19,3 @@ attr_reader :standard, :input
   end
 
 end
-
-
-#### validate that input is a number
-

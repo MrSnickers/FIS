@@ -13,17 +13,12 @@ game = Number_guesser.new
 
 puts "Please guess a number between 1 and 100."
 
-#input = gets.chomp
 
-# def guess(answer, standard)
-#       if answer == standard
+
 #           puts "That's it!"
-#           return true
-#     else
+
 #           puts "Nope.  I wasn't thinking of #{answer}."
-#           return false
-#     end
-# end
+
 
 
 

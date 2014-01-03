@@ -10,5 +10,12 @@ attr_reader :standard
     @input = gets.chomp
   end
 
+  def check_guess
+        if @input == @standard
+           true
+      else
+           false
+      end
+  end
 
 end

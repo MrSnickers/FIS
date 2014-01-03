@@ -1,6 +1,6 @@
 class Number_guesser
 
-attr_reader :standard
+attr_reader :standard, :input
   
   def initialize
     @standard = rand(1..100)
@@ -11,11 +11,11 @@ attr_reader :standard
   end
 
   def match?
-    @input == @standard
+    input == standard
   end
 
   def guess_valid?
-    @input.class == Fixnum
+    input.class == Fixnum
   end
 
 end

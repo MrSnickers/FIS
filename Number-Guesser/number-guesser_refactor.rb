@@ -13,13 +13,18 @@ game = Number_guesser.new
 
 puts "Please guess a number between 1 and 100."
 game.guess
-if game.check_guess
-  puts "That's it!"
+if game.guess_valid?
+  if game.check_guess
+    puts "That's it!"
+  else
+    puts "Nope.  I wasn't thinking of #{game.input}."
+  end
 else
-  puts "Nope.  I wasn't thinking of #{game.input}."
+  puts "Please enter a whole number between 1 and 100, or exit by entering 'exit.'"
 end
 
-
+#### allow subsequent guesses
+#### Let user exit
 
 
 

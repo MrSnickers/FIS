@@ -33,4 +33,11 @@ describe "#Number_guesser" do
     expect(game.input_valid?).to eq(false)
   end
 
+    it "should recognize exit as a special input" do
+    game = Number_guesser.new
+    game.stub(:input) { 'exit' }
+
+    expect(game.exit?).to eq(true)
+  end
+
 end

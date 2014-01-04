@@ -13,21 +13,20 @@ require 'debugger'
 game = Number_guesser.new
 
 puts "Please guess a number between 1 and 100."
-until game.match? || game.exit?
+until game.compare == 0 || game.exit?
   game.guess
   if game.exit?
     puts "Goodbye"
   else
     if game.input_valid_number?
-      if game.match?
-        puts "That's it!"
+      if game.compare == 0
+        puts "That's it! You win!"
       else
-        puts "Nope.  I wasn't thinking of #{game.input}. Guess again!"
+        game.compare == -1 ? direction = "higher" : direction = "lower"
+        puts "Nope.  I wasn't thinking of #{game.input}. Guess #{direction}!"
       end
     else
       puts "Please enter a whole number between 1 and 100, or exit by entering 'exit.'"
     end
   end
 end
-
-#### Let user exit

@@ -1,4 +1,4 @@
-require "./first_even.rb"
+require "./first_even_refactor.rb"
 
 describe "first even" do
   it "should return the first even number in an array" do

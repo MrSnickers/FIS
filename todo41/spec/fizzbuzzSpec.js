@@ -1,4 +1,4 @@
-describe( "#fizzbuzz", function() {
+describe( "fizzbuzz", function() {
   it("should return 'fizzbuzz' when number is divisble by 15", function() {
     expect(fizzbuzz(75)).toBe("fizzbuzz");
   });      
@@ -12,7 +12,7 @@ describe( "#fizzbuzz", function() {
   });
 
   it("should return 'buzz' when number is divisble by 5, but not 15", function() {
-    expect(fizzbuzz(13)).toBe("13");
+    expect(fizzbuzz(13)).toBe(13);
   });
 
 });

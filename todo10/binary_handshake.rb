@@ -32,7 +32,7 @@ class SecretHandshake
 attr_reader :code
 
     def initialize(code)
-        @code =code
+        @code = code
     end
 
     def commands

@@ -11,6 +11,7 @@ class Triangle
     @side2 = b
     @side3 = c
     self.assign_kind
+    self.side_check
   end
 
   def assign_kind
@@ -29,7 +30,7 @@ class Triangle
 
   end
 
-def side_check(a,b,c)
+def side_check
   raise Error, "This triangle does not have allowable dimentions"  if a == 0 || b == 0 || c == 0
 
 end

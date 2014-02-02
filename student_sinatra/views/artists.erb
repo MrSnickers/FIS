@@ -1,0 +1,7 @@
+<h1>"These people are artists!"</h1>
+
+<ul>
+  <% @artist_array.each_with_index do |artist, index| %>
+    <li><%= index+1 %>. <%= artist%></li>
+  <% end %>
+</ul>

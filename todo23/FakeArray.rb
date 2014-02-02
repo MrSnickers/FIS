@@ -20,13 +20,24 @@
 # Note: I've intentionally omitted a step here where you'd have to somehow tell your class that were using an array of 1,2,3
  
 class FakeArray
+
+  include Enumerable
+
+
+
+  def initialize
+    @hidden_array = []
+  end
  
   def each
+    hidden_array.length.times do |index|
+      yield hidden_array[index]
+    end
     
   end
  
   def first
-    
+    hidden_array.first
   end
  
   def []()

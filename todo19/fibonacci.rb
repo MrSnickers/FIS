@@ -7,6 +7,7 @@ def fibo_finder(n)
       result = 1
     else
       result = 2
+      
       until counter == n
         result += result-1
         counter += 1

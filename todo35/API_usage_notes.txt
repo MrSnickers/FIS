@@ -1,5 +1,0 @@
-require 'openuri'
-require 'nokogiri'
-temp = open("https://gdata.youtube.com/feeds/api/videos?q=bunny")
-url = Nokogiri::HTML(temp.read)
-url.xpath('//link[contains(@href, "https://www.youtube.com/watch")]').first["href"]

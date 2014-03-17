@@ -2,7 +2,7 @@
 
 class Triangle
 
-  # exception :TriangleError
+  exception :TriangleError
   attr_reader :side1, :side2, :side3, :kind
 
   def initialize(a, b, c)
@@ -30,7 +30,7 @@ class Triangle
   end
 
 def side_check(a,b,c)
-  raise Error, "This triangle does not have allowable dimentions"  if a == 0 || b == 0 || c == 0
+  raise TriangleError, "This triangle does not have allowable dimentions"  if a == 0 || b == 0 || c == 0
 
 end
 

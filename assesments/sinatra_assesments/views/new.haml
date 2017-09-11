@@ -1,0 +1,13 @@
+%h1 Let's make a SpaceCat!
+
+%form{:action=>"/SpaceCat/index", :method=>"POST"}
+  %fieldset
+    %label{:for=>"name"} This SpaceCat needs a name!
+    %input{:id=>"name", :type=>"text"} 
+    %label{:for=>"home_planet"} What planet does this cat call home?
+    %input{:id=>"home_planet", :type=>"text"}
+    %label{:for=>"tagline"} What's this cat's tagline?
+    %input{:id=>"tagline", :type=>"text"}
+    %label{:for=>"superpower"} What's this cat's superpower?
+    %input{:id=>"superpower", :type=>"text"}
+%input{:type=>"submit", :value=>"Run the Machine"}

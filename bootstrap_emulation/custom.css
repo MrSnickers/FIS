@@ -1,0 +1,28 @@
+.top_nav{
+  display: inline-block;
+}
+
+.top_nav li{
+  display:inline; 
+}
+
+.jumbotron{
+  display:block;
+}
+
+.button{
+
+}
+
+.project_container{
+  width: 100%;
+  margin:0 auto;
+}
+
+
+.project{
+  display:inline-block;
+  width:30%;
+  margin:0 auto;
+
+}
